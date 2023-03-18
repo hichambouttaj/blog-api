@@ -6,10 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BlogConfiguration {
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-
 }

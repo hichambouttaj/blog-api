@@ -5,11 +5,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Date;
@@ -45,16 +47,27 @@ public class BlogExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(message, e.getStatus());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDetails> globalExceptionHandler(
-            Exception e, WebRequest webRequest) {
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorDetails> accessDeniedExceptionHandler(AccessDeniedException e, WebRequest webRequest) {
         ErrorDetails message = new ErrorDetails();
         message.setTimestamp(new Date());
-        message.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        message.setStatus(HttpStatus.UNAUTHORIZED.value());
         message.setMessage(e.getMessage());
         message.setDetails(webRequest.getDescription(false));
 
-        return new ResponseEntity<>(message,HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(message, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorDetails> methodArgumentTypeMismatchExceptionHandler(
+            MethodArgumentTypeMismatchException e, WebRequest webRequest) {
+        ErrorDetails message = new ErrorDetails();
+        message.setTimestamp(new Date());
+        message.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+        message.setMessage(e.getMessage());
+        message.setDetails(webRequest.getDescription(false));
+
+        return new ResponseEntity<>(message,HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Override
