@@ -20,7 +20,6 @@ public class CommentDto implements Serializable {
     private Long id;
     @NotEmpty(message = "Name should not be null or empty")
     @NotBlank(message = "Name should not be null or blank")
-    @NotBlank
     private String name;
     @NotEmpty(message = "Email should not be null or empty")
     @NotBlank(message = "Email should not be null or blank")
