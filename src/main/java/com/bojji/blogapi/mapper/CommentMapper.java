@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class CommentMapper implements IMapper<Comment, CommentDto>{
-
     private final ModelMapper mapper;
 
     @Override

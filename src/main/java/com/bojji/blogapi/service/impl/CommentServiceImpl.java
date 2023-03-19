@@ -65,6 +65,7 @@ public class CommentServiceImpl implements CommentService {
     public CommentDto update(Long postId, Long commentId, CommentDto commentDto) {
         Comment comment = checkCommentByPost(postId, commentId);
 
+        comment.setId(commentId);
         comment.setName(commentDto.getName());
         comment.setEmail(commentDto.getEmail());
         comment.setBody(commentDto.getBody());

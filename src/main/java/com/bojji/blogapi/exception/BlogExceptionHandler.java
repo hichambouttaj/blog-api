@@ -82,4 +82,17 @@ public class BlogExceptionHandler extends ResponseEntityExceptionHandler {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDetails> GlobaliExceptionHandler(
+            Exception e,
+            WebRequest webRequest) {
+        ErrorDetails message = new ErrorDetails();
+        message.setTimestamp(new Date());
+        message.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        message.setMessage(e.getMessage());
+        message.setDetails(webRequest.getDescription(false));
+
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

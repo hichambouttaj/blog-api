@@ -59,6 +59,7 @@ public class PostServiceImpl implements PostService {
                 () -> new ResourceNotFoundException("Post", "id", id.toString())
         );
 
+        post.setId(id);
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
         post.setContent(postDto.getContent());
