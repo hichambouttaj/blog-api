@@ -1,5 +1,6 @@
 package com.bojji.blogapi.service.impl;
 
+import com.bojji.blogapi.auth.JwtTokenProvider;
 import com.bojji.blogapi.dtos.LoginRequestDto;
 import com.bojji.blogapi.dtos.RegisterRequestDto;
 import com.bojji.blogapi.entity.Role;
@@ -27,6 +28,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider tokenProvider;
     @Override
     public String login(LoginRequestDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(
@@ -36,7 +38,10 @@ public class AuthServiceImpl implements AuthService {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "User Logged-in successfully!";
+
+        String token = tokenProvider.generateToken(authentication);
+
+        return token;
     }
 
     @Override
@@ -63,6 +68,16 @@ public class AuthServiceImpl implements AuthService {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return "User registered successfully!";
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        registerDto.getEmail(), registerDto.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = tokenProvider.generateToken(authentication);
+
+        return token;
     }
 }

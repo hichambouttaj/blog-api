@@ -1,7 +1,9 @@
 package com.bojji.blogapi.controller;
 
+import com.bojji.blogapi.dtos.JwtAuthResponse;
 import com.bojji.blogapi.dtos.LoginRequestDto;
 import com.bojji.blogapi.dtos.RegisterRequestDto;
+import com.bojji.blogapi.dtos.TokenType;
 import com.bojji.blogapi.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,20 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-
     private final AuthService authService;
 
     // build login
     @PostMapping("/login")
-    public ResponseEntity<String> loginHandler(@Valid @RequestBody LoginRequestDto loginDto) {
-        String response = authService.login(loginDto);
+    public ResponseEntity<JwtAuthResponse> loginHandler(@Valid @RequestBody LoginRequestDto loginDto) {
+        String token = authService.login(loginDto);
+
+        JwtAuthResponse response = new JwtAuthResponse();
+        response.setToken(token);
+        response.setType(TokenType.Bearer);
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // build register
     @PostMapping("/register")
-    public ResponseEntity<String> registerHandler(@Valid @RequestBody RegisterRequestDto registerDto) {
-        String response = authService.register(registerDto);
+    public ResponseEntity<JwtAuthResponse> registerHandler(@Valid @RequestBody RegisterRequestDto registerDto) {
+        String token = authService.register(registerDto);
+
+        JwtAuthResponse response = new JwtAuthResponse();
+        response.setToken(token);
+        response.setType(TokenType.Bearer);
+
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
