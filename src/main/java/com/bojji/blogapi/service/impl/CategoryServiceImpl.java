@@ -30,7 +30,6 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryResponse;
     }
-
     @Override
     public Page<CategoryDto> getAll(Integer pageNumber,
                                     Integer pageSize,
@@ -49,7 +48,6 @@ public class CategoryServiceImpl implements CategoryService {
         );
         return mapper.toDto(category);
     }
-
     @Override
     public CategoryDto update(CategoryDto categoryDto, Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(
@@ -64,5 +62,13 @@ public class CategoryServiceImpl implements CategoryService {
         Category updatedCategory = categoryRepository.save(category);
 
         return mapper.toDto(updatedCategory);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        Category category = categoryRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Category", "id", id.toString())
+        );
+        categoryRepository.delete(category);
     }
 }
