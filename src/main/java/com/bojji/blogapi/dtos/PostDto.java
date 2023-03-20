@@ -2,6 +2,7 @@ package com.bojji.blogapi.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,5 +31,7 @@ public class PostDto implements Serializable {
     @NotEmpty(message = "Content should not be null or empty")
     @NotBlank(message = "Content should not be null or blank")
     private String content;
+    @NotNull(message = "Category id should not be null")
+    private Long categoryId;
     private Set<CommentDto> comments = new HashSet<>();
 }

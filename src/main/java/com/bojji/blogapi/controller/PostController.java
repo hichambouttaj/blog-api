@@ -37,6 +37,22 @@ public class PostController {
         );
     }
 
+    // get all posts by category
+    @GetMapping("/category/{id}")
+    public ResponseEntity<Page<PostDto>> getAllPosts(
+            @PathVariable(name = "id") long categoryId,
+            @RequestParam(name = "pageNo", required = false) Integer pageNumber,
+            @RequestParam(name = "pageSize", required = false) Integer pageSize,
+            @RequestParam(name = "sortBy", required = false) String sortField,
+            @RequestParam(name = "sortDir", required = false) String sortDirection
+    ) {
+        return new ResponseEntity<>(
+                postService.getPostsByCategoryId(
+                        categoryId, pageNumber, pageSize, sortField, sortDirection
+                ), HttpStatus.OK
+        );
+    }
+
     // get post by id
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id) {
