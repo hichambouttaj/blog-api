@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -24,6 +25,6 @@ public class Category {
     @Column(name = "description", nullable = false)
     private String description;
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Post> posts;
+    private Set<Post> posts = new HashSet<>();
 }
 

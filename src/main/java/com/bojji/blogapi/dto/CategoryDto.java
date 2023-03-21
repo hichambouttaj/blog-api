@@ -1,4 +1,4 @@
-package com.bojji.blogapi.dtos;
+package com.bojji.blogapi.dto;
 
 import com.bojji.blogapi.entity.Category;
 import jakarta.validation.constraints.NotBlank;

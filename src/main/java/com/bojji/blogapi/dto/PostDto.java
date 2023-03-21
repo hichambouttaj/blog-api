@@ -1,4 +1,4 @@
-package com.bojji.blogapi.dtos;
+package com.bojji.blogapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

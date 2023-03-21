@@ -1,7 +1,8 @@
 package com.bojji.blogapi.controller;
 
-import com.bojji.blogapi.dtos.CategoryDto;
+import com.bojji.blogapi.dto.CategoryDto;
 import com.bojji.blogapi.service.CategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,14 +12,17 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // create category
-    @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping
     public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto) {
         return new ResponseEntity<>(categoryService.create(categoryDto), HttpStatus.CREATED);
     }
@@ -43,6 +47,9 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.getById(id), HttpStatus.OK);
     }
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // update category by id
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
@@ -51,6 +58,9 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.update(categoryDto, id), HttpStatus.OK);
     }
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // delete category by id
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")

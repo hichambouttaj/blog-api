@@ -1,6 +1,6 @@
 package com.bojji.blogapi.exception;
 
-import com.bojji.blogapi.dtos.ErrorDetails;
+import com.bojji.blogapi.dto.ErrorDetails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

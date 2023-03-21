@@ -1,9 +1,9 @@
 package com.bojji.blogapi.controller;
 
-import com.bojji.blogapi.dtos.JwtAuthResponse;
-import com.bojji.blogapi.dtos.LoginRequestDto;
-import com.bojji.blogapi.dtos.RegisterRequestDto;
-import com.bojji.blogapi.dtos.TokenType;
+import com.bojji.blogapi.dto.JwtAuthResponse;
+import com.bojji.blogapi.dto.LoginRequestDto;
+import com.bojji.blogapi.dto.RegisterRequestDto;
+import com.bojji.blogapi.dto.TokenType;
 import com.bojji.blogapi.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;

@@ -1,6 +1,6 @@
 package com.bojji.blogapi.service;
 
-import com.bojji.blogapi.dtos.CommentDto;
+import com.bojji.blogapi.dto.CommentDto;
 import org.springframework.data.domain.Page;
 
 public interface CommentService {

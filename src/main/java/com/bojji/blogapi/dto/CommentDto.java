@@ -1,4 +1,4 @@
-package com.bojji.blogapi.dtos;
+package com.bojji.blogapi.dto;
 
 import com.bojji.blogapi.entity.Comment;
 import jakarta.validation.constraints.Email;

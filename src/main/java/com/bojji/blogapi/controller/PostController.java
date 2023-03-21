@@ -1,7 +1,8 @@
 package com.bojji.blogapi.controller;
 
-import com.bojji.blogapi.dtos.PostDto;
+import com.bojji.blogapi.dto.PostDto;
 import com.bojji.blogapi.service.PostService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,11 +12,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // create blog post
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
@@ -59,6 +63,9 @@ public class PostController {
         return new ResponseEntity<>(postService.getById(id), HttpStatus.OK);
     }
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // update post by id
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
@@ -67,6 +74,9 @@ public class PostController {
         return new ResponseEntity<>(postService.update(postDto, id), HttpStatus.OK);
     }
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // delete post by id
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")

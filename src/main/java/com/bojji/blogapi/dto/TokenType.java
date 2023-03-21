@@ -1,4 +1,4 @@
-package com.bojji.blogapi.dtos;
+package com.bojji.blogapi.dto;
 
 public enum TokenType {
     Bearer

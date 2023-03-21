@@ -1,6 +1,6 @@
 package com.bojji.blogapi.service.impl;
 
-import com.bojji.blogapi.dtos.CommentDto;
+import com.bojji.blogapi.dto.CommentDto;
 import com.bojji.blogapi.entity.Comment;
 import com.bojji.blogapi.entity.Post;
 import com.bojji.blogapi.exception.BlogAPIException;

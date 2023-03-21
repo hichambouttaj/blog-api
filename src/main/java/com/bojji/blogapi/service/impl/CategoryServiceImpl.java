@@ -1,6 +1,6 @@
 package com.bojji.blogapi.service.impl;
 
-import com.bojji.blogapi.dtos.CategoryDto;
+import com.bojji.blogapi.dto.CategoryDto;
 import com.bojji.blogapi.entity.Category;
 import com.bojji.blogapi.exception.ResourceNotFoundException;
 import com.bojji.blogapi.mapper.CategoryMapper;

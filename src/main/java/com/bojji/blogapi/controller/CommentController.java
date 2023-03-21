@@ -1,7 +1,8 @@
 package com.bojji.blogapi.controller;
 
-import com.bojji.blogapi.dtos.CommentDto;
+import com.bojji.blogapi.dto.CommentDto;
 import com.bojji.blogapi.service.CommentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,12 +11,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/posts/{postId}/comments")
+@RequestMapping("/api/v1/posts/{postId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
-
     private final CommentService commentService;
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // create comment post
     @PostMapping
     public ResponseEntity<CommentDto> createComment(
@@ -45,6 +48,9 @@ public class CommentController {
         return new ResponseEntity<>(commentService.getById(postId, commentId), HttpStatus.OK);
     }
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // update comment by id
     @PutMapping("/{commentId}")
     public ResponseEntity<CommentDto> updateComment(
@@ -56,6 +62,9 @@ public class CommentController {
         return new ResponseEntity<>(commentResponse, HttpStatus.OK);
     }
 
+    @SecurityRequirement(
+            name = "Bearer Authentication"
+    )
     // delete comment by id
     @DeleteMapping("/{commentId}")
     public ResponseEntity<String> deleteComment(

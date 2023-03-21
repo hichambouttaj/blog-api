@@ -1,9 +1,7 @@
 package com.bojji.blogapi.service;
 
-import com.bojji.blogapi.dtos.PostDto;
+import com.bojji.blogapi.dto.PostDto;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface PostService {
     PostDto create(PostDto t);

@@ -1,6 +1,6 @@
 package com.bojji.blogapi.service.impl;
 
-import com.bojji.blogapi.dtos.PostDto;
+import com.bojji.blogapi.dto.PostDto;
 import com.bojji.blogapi.entity.Category;
 import com.bojji.blogapi.entity.Post;
 import com.bojji.blogapi.exception.ResourceNotFoundException;
@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class PostServiceImpl implements PostService {
     private final CategoryRepository categoryRepository;
     private final PostMapper mapper;
     @Override
+    @Transactional
     public PostDto create(PostDto postDto) {
         // get Category by id
         Category category = categoryRepository.findById(postDto.getCategoryId())
@@ -31,6 +33,9 @@ public class PostServiceImpl implements PostService {
 
         // add category to post entity
         post.setCategory(category);
+
+        // set post to comments
+        post.getComments().forEach(comment -> comment.setPost(post));
 
         // save post to db
         Post savedPost = postRepository.save(post);

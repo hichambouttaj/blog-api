@@ -1,6 +1,6 @@
 package com.bojji.blogapi.mapper;
 
-import com.bojji.blogapi.dtos.CategoryDto;
+import com.bojji.blogapi.dto.CategoryDto;
 import com.bojji.blogapi.entity.Category;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

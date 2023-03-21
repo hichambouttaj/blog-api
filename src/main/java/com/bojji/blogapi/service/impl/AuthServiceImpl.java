@@ -1,8 +1,8 @@
 package com.bojji.blogapi.service.impl;
 
 import com.bojji.blogapi.auth.JwtTokenProvider;
-import com.bojji.blogapi.dtos.LoginRequestDto;
-import com.bojji.blogapi.dtos.RegisterRequestDto;
+import com.bojji.blogapi.dto.LoginRequestDto;
+import com.bojji.blogapi.dto.RegisterRequestDto;
 import com.bojji.blogapi.entity.Role;
 import com.bojji.blogapi.entity.User;
 import com.bojji.blogapi.exception.BlogAPIException;

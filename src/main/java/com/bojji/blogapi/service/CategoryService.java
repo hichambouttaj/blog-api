@@ -1,6 +1,6 @@
 package com.bojji.blogapi.service;
 
-import com.bojji.blogapi.dtos.CategoryDto;
+import com.bojji.blogapi.dto.CategoryDto;
 import org.springframework.data.domain.Page;
 
 public interface CategoryService {
